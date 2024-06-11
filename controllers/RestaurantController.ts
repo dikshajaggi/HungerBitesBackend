@@ -154,7 +154,7 @@ export const addRestaurant = async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/get-all-restaurants:
+ * /api/all-restaurants:
  *   get:
  *     summary: Get all restaurants
  *     description: Retrieve all restaurants from the system.
@@ -167,24 +167,24 @@ export const addRestaurant = async (req: Request, res: Response) => {
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Restaurant' 
+ *                 $ref: '/models/Restaurant' 
  *       '500':
  *         description: Internal server error.
  */
 
-export const getAllRest = async (req:Request, res: Response) => {
-    try {
-        const rests = await Restaurant.find()
-        res.status(200).json(rests)
-    } catch (error: any) {
-        console.error("error getting restaurants", error)
-        res.status(500).json({message: "failed to fetch restaurants"})
-    }
+export const getAllRest = async (req: Request, res: Response) => {
+  try {
+    const rests = await Restaurant.find()
+    res.status(200).json(rests)
+  } catch (error: any) {
+    console.error("error getting restaurants", error)
+    res.status(500).json({ message: "failed to fetch restaurants" })
+  }
 }
 
 /**
  * @swagger
- * /api/get-specific-restaurant/{id}:
+ * /api/restaurants/{id}:
  *   get:
  *     summary: Get a specific restaurant
  *     description: Retrieve a specific restaurant by its ID.
@@ -210,14 +210,14 @@ export const getAllRest = async (req:Request, res: Response) => {
  */
 
 export const getSpecificRest = async (req: Request, res: Response) => {
-    const {id} = req.params
-    try {
-        const rest = await Restaurant.findById(id)
-        res.status(200).json(rest)
-    } catch (error: any) {
-        console.error("error getting restaurants", error)
-        res.status(500).json({message: "failed to fetch rest"})
-    }
+  const { id } = req.params
+  try {
+    const rest = await Restaurant.findById(id)
+    res.status(200).json(rest)
+  } catch (error: any) {
+    console.error("error getting restaurants", error)
+    res.status(500).json({ message: "failed to fetch rest" })
+  }
 }
 
 /**
@@ -278,17 +278,17 @@ export const getSpecificRest = async (req: Request, res: Response) => {
 
 export const addMenuItems = async (req: Request, res: Response) => {
   try {
-    const {id, dish} = req.body
-    const rest = await Restaurant.findOne({id})
+    const { id, dish } = req.body
+    const rest = await Restaurant.findOne({ id })
     console.log(rest, "getting rest")
     if (!rest) {
       return res.status(404).json({ success: false, message: 'Restaurant not found' });
-  }
+    }
     rest.menu.push(dish)
     await rest.save()
   }
   catch (error: any) {
     console.log(error, "error")
-    res.status(500).json({message: "internal server error"})
+    res.status(500).json({ message: "internal server error" })
   }
 }
