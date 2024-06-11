@@ -1,0 +1,6 @@
+-> index.js - set up express server, body parser
+-> db.js - set up mongodb
+-> model - define schema
+-> controller - logic for getting the requested data 
+-> router - route to interact with the server
+-> connect route in index.js
