@@ -1,16 +1,16 @@
-import mongoose from "mongoose"
+import mongoose, { ConnectOptions } from 'mongoose';
+import dotenv from 'dotenv';
 
-const connectDB = async () => {
-    try {
-        await mongoose.connect('mongodb+srv://diksha2000may:xYWyZm7v4ylD8FKe@cluster0.4zjougz.mongodb.net/');
-        console.log('MongoDB connected');
-    } catch (err) {
-        if (err instanceof Error) {
-            console.error(err.message);
-            process.exit(1);
-        }
-        
-    }
+dotenv.config();
+
+const connectDB = async (): Promise<void> => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI!);
+    console.log('MongoDB connected');
+  } catch (error: any) {
+    console.error('MongoDB connection error:', error.message);
+    process.exit(1); // Exit process with failure
+  }
 };
 
 export default connectDB;
