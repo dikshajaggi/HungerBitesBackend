@@ -3,7 +3,7 @@ import { Response, Request } from 'express';
 
 /**
  * @swagger
- * /api/add-restaurant:
+ * /api/add-restaurants:
  *   post:
  *     summary: Add a new restaurant
  *     description: Add a new restaurant to the system.
@@ -19,7 +19,7 @@ import { Response, Request } from 'express';
  *               id:
  *                 type: string
  *                 description: The ID of the restaurant.
- *                 example: "60c72b2f5f1b2c001c8e4c8b"
+ *                 example: "253731"
  *               name:
  *                 type: string
  *                 description: The name of the restaurant.
@@ -286,6 +286,8 @@ export const addMenuItems = async (req: Request, res: Response) => {
     }
     rest.menu.push(dish)
     await rest.save()
+    res.status(200).json({ message: "dish added successfully" })
+
   }
   catch (error: any) {
     console.log(error, "error")

@@ -2,69 +2,68 @@ import mongoose from 'mongoose';
 
 // schema for menu
 const menuSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+    id: { type: String },
     name: {
-        type: String,
-        required: true
+        type: String
     },
     description: {
         type: String,
-        required: true
     },
     price: {
         type: Number,
-        required: true
+    },
+    defaultPrice: {
+        type: Number,
     },
     category: {
-        type: String,
-        required: true
+        type: String
     },
-    imageId: { type: String, required: true },
-    inStock: { type: Number, required: true },
+    imageId: { type: String },
+    inStock: { type: Number },
 });
 
 // schema for the SLA 
 const slaSchema = new mongoose.Schema({
-    deliveryTime: { type: Number, required: true },
-    lastMileTravel: { type: Number, required: true },
-    serviceability: { type: String, required: true },
-    slaString: { type: String, required: true },
-    lastMileTravelString: { type: String, required: true },
-    iconType: { type: String, required: true }
+    deliveryTime: { type: Number },
+    lastMileTravel: { type: Number },
+    serviceability: { type: String },
+    slaString: { type: String },
+    lastMileTravelString: { type: String },
+    iconType: { type: String }
 });
 
 // schema for the availability 
 const availabilitySchema = new mongoose.Schema({
-    nextCloseTime: { type: Date, required: true },
-    opened: { type: Boolean, required: true }
+    nextCloseTime: { type: Date },
+    opened: { type: Boolean }
 });
 
 // schema for the aggregatedDiscountInfoV3
 const aggregatedDiscountInfoV3Schema = new mongoose.Schema({
-    header: { type: String, required: true },
-    subHeader: { type: String, required: true }
+    header: { type: String },
+    subHeader: { type: String }
 });
 
 // main restaurant schema
 const restaurantSchema = new mongoose.Schema({
     id: { type: String, required: true },
     name: { type: String, required: true },
-    cloudinaryImageId: { type: String, required: true },
-    image: { type: String, required: true },
-    locality: { type: String, required: true },
-    areaName: { type: String, required: true },
-    costForTwo: { type: String, required: true },
-    cuisines: { type: [String], required: true },
-    avgRating: { type: Number, required: true },
-    parentId: { type: String, required: true },
-    avgRatingString: { type: String, required: true },
-    totalRatingsString: { type: String, required: true },
-    sla: { type: slaSchema, required: true },
-    availability: { type: availabilitySchema, required: true },
-    isOpen: { type: Boolean, required: true },
-    type: { type: String, required: true },
-    aggregatedDiscountInfoV3: { type: aggregatedDiscountInfoV3Schema, required: true },
-    menu : [menuSchema]
+    cloudinaryImageId: { type: String },
+    image: { type: String },
+    locality: { type: String },
+    areaName: { type: String },
+    costForTwo: { type: String },
+    cuisines: { type: [String] },
+    avgRating: { type: Number },
+    parentId: { type: String },
+    avgRatingString: { type: String },
+    totalRatingsString: { type: String },
+    sla: { type: slaSchema },
+    availability: { type: availabilitySchema },
+    isOpen: { type: Boolean },
+    type: { type: String },
+    aggregatedDiscountInfoV3: { type: aggregatedDiscountInfoV3Schema },
+    menu: [menuSchema]
 });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
