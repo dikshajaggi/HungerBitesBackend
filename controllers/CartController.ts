@@ -131,7 +131,7 @@ export const getAllCartItems = async (req: Request, res: Response) => {
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Cart not found' });
         }
-        res.status(200).json({ success: true, items: cart });
+        res.status(200).json({ success: true, message: "Fetched all cart items successfully", items: cart });
 
     } catch (error: any) {
         console.log(error, "error cart items")
