@@ -88,46 +88,11 @@ export const addToCart = async (req: Request, res: Response) => {
     }
 };
 
-/**
- * @swagger
- * /api/get-cart-items/{userId}:
- *   get:
- *     summary: Get all items in the cart for a user
- *     description: Retrieve all items currently in the cart for a specific user.
- *     tags: [Cart]
- *     parameters:
- *       - in: path
- *         name: userId
- *         schema:
- *           type: string
- *         required: true
- *         description: The ID of the user whose cart items are to be retrieved.
- *     responses:
- *       '200':
- *         description: An array of cart items.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   description: Indicates whether the request was successful.
- *                 items:
- *                   type: array
- *                   description: List of items in the cart.
- *                   items:
- *                     $ref: 'models/cart' 
- *       '404':
- *         description: Cart not found for the specified user ID.
- *       '500':
- *         description: Internal server error.
- */
 
 export const getAllCartItems = async (req: Request, res: Response) => {
     try {
-        const userId = req.params.userId;
-        const cart = await Cart.findOne({ userId });
+        const user = req.params.id;
+        const cart = await Cart.findOne({ user });
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Cart not found' });
         }
