@@ -201,48 +201,14 @@ export const deleteAllItems = async (req: Request, res: Response) => {
     }
 }
 
-/**
- * @swagger
- * /api/delete-specific/{userId}:
- *   delete:
- *     summary: Remove a specific item from the cart
- *     description: Remove a specific item from the cart for a specific user.
- *     tags: [Cart]
- *     parameters:
- *       - in: path
- *         name: userId
- *         schema:
- *           type: string
- *         required: true
- *         description: The ID of the user whose cart item is to be removed.
- *       - in: body
- *         name: itemData
- *         description: Object containing the ID of the item to remove
- *         required: true
- *         schema:
- *           type: object
- *           properties:
- *             id:
- *               type: string
- *               description: The ID of the item to remove.
- *     responses:
- *       '200':
- *         description: Item removed successfully
- *       '404':
- *         description: Cart not found for the specified user ID or item not found in cart.
- *       '500':
- *         description: Internal server error.
- */
-
 export const deleteSpecificItem = async (req: Request, res: Response) => {
     try {
-        const { id } = req.body
-        const userId = req.params.userId;
-        const cart = await Cart.findOne({ userId });
+        const {userId, dishId} = req.params;
+        const cart = await Cart.findOne({ user: userId });
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Cart not found' });
         }
-        const itemIndex = cart.items.findIndex(item => item.menu.id === id)
+        const itemIndex = cart.items.findIndex(item => item.menu.id === dishId)
         if (itemIndex === -1) {
             return res.status(404).json({ success: false, message: 'Item not found in cart' });
         }

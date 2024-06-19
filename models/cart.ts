@@ -8,18 +8,18 @@ const menuSchema = new mongoose.Schema({
   },
   description: {
       type: String,
-      required: true
   },
   price: {
       type: Number,
-      required: true
+  },
+  defaultPrice: {
+    type: Number,
   },
   category: {
       type: String,
-      required: true
   },
-  imageId: { type: String, required: true },
-  inStock: { type: Number, required: true },
+  imageId: { type: String },
+  inStock: { type: Number },
 });
 
 const CartItemSchema = new mongoose.Schema({

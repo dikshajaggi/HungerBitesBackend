@@ -200,6 +200,7 @@ export const removeFavRest = async (req: Request, res: Response) => {
 export const showFavRests = async (req: Request, res: Response) => {
     try {
         const userId = req.params.id;
+        console.log(userId, req.params,"check")
         const data = await FavouriteRest.find({userId})
         if (!data || data?.length === 0) {
             return res.status(404).json({ success: false, message: "No restaurants marked as favourite" })

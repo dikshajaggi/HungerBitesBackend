@@ -7,6 +7,6 @@ router.post('/add-to-cart', addToCart)
 router.get('/get-cart-items/:id', getAllCartItems)
 router.post("/update-cart-qty/:id", updateCartQty)
 router.delete("/clear-cart/:id", deleteAllItems)
-router.delete("/delete-specific/:id", deleteSpecificItem)
+router.delete("/delete-specific/:userId/:dishId", deleteSpecificItem)
 
 export default router
