@@ -6,6 +6,7 @@ import cors from "cors";
 import RestaurantRoutes from "./routes/RestaurantRoutes";
 import CartRoutes from "./routes/CartRoutes";
 import FavRestRoutes from "./routes/FavRestRoutes"
+import CategoryRoutes from "./routes/CategoryRoutes"
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swaggerConfig";
 
@@ -22,6 +23,7 @@ app.get("/health", async (req: Request, res: Response) => {
 app.use('/api', RestaurantRoutes);
 app.use('/api', CartRoutes);
 app.use('/api', FavRestRoutes);
+app.use('/api', CategoryRoutes)
 
 connectDB().then(() => {
   console.log('MongoDB connected');
