@@ -23,6 +23,7 @@ const menuSchema = new mongoose.Schema({
 });
 
 const CartItemSchema = new mongoose.Schema({
+    id: { type: String, required: true },
     menu: {
         type: menuSchema,
         required: true

@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import Cart from "../models/cart"
-
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * @swagger
@@ -74,7 +74,7 @@ export const addToCart = async (req: Request, res: Response) => {
         if (itemExists) {
             return res.status(400).json({ success: false, message: 'Item already exists in the cart' });
         }
-        const cartItem = { menu, quantity };
+        const cartItem = { menu, quantity, id: uuidv4() };
         cart.items.push(cartItem);
         await cart.save();
         res.status(201).json({ message: "Item added to cart successfully" });

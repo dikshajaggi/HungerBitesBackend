@@ -8,6 +8,7 @@ import CartRoutes from "./routes/CartRoutes";
 import FavRestRoutes from "./routes/FavRestRoutes"
 import CategoryRoutes from "./routes/CategoryRoutes"
 import SearchRoutes from "./routes/SearchRoutes"
+import OrderRoutes from "./routes/OrderRoutes"
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swaggerConfig";
 
@@ -26,6 +27,7 @@ app.use('/api', CartRoutes);
 app.use('/api', FavRestRoutes);
 app.use('/api', CategoryRoutes);
 app.use('/api', SearchRoutes);
+app.use('/api', OrderRoutes);
 
 connectDB().then(() => {
   console.log('MongoDB connected');
