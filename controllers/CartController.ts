@@ -150,6 +150,7 @@ export const updateCartQty = async (req: Request, res: Response) => {
             return res.status(404).json({ success: false, message: 'Cart not found' });
         }
         const item = cart.items.filter(item => item.menu.id === id)
+        console.log(cart, item, "kline153")
         if (type === "inc") item[0].quantity = item[0].quantity + 1
         else if (type === "dec") {
             if (item[0].quantity > 1) {
@@ -159,6 +160,7 @@ export const updateCartQty = async (req: Request, res: Response) => {
         await cart.save()
         res.status(200).json({ success: true, items: cart, message: "Cart updated successfully" });
     } catch (error: any) {
+        console.log(error, "updatecartere")
         res.status(500).json({ success: false, message: "Internal server error" })
     }
 }
