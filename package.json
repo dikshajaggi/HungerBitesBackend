@@ -2,10 +2,10 @@
   "name": "hungerbitesbackend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon",
-     "build": "tsc",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "build": "tsc",
     "start": "node dist/index.js"
   },
   "keywords": [],
