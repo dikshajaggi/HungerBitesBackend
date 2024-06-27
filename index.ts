@@ -31,8 +31,8 @@ app.use('/api', OrderRoutes);
 
 connectDB().then(() => {
   console.log('MongoDB connected');
-  app.listen(7000, () => {
-    console.log("server started on http://localhost:7000");
+  app.listen(process.env.PORT, () => {
+    console.log(`server started on http://localhost:${process.env.PORT}`);
   });
 }).catch(error => {
   console.error("MongoDB connection failed:", error);
