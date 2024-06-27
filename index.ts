@@ -13,6 +13,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swaggerConfig";
 
 const app = express();
+const port = process.env.PORT || 7000
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(express.json());
@@ -31,8 +32,8 @@ app.use('/api', OrderRoutes);
 
 connectDB().then(() => {
   console.log('MongoDB connected');
-  app.listen(process.env.PORT, () => {
-    console.log(`server started on http://localhost:${process.env.PORT}`);
+  app.listen(port, () => {
+    console.log(`server started on http://localhost:${port}`);
   });
 }).catch(error => {
   console.error("MongoDB connection failed:", error);
