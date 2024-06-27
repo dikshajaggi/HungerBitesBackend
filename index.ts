@@ -18,7 +18,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors({ origin: 'http://localhost:3001' }))
+app.use(cors({ origin: 'http://localhost:3000' }))
 app.get("/health", async (req: Request, res: Response) => {
   res.send({ message: "health OK!" });
 });
