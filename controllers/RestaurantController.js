@@ -1,5 +1,4 @@
-import Restaurant from "../models/restaurant";
-import { Response, Request } from 'express';
+import Restaurant from "../models/restaurant.js";
 
 /**
  * @swagger
@@ -140,13 +139,13 @@ import { Response, Request } from 'express';
  *         description: Internal server error.
  */
 
-export const addRestaurant = async (req: Request, res: Response) => {
+export const addRestaurant = async (req, res) => {
   console.log("new rest content check");
   try {
     const newRestaurant = new Restaurant(req.body);
     await newRestaurant.save();
     res.status(201).json(newRestaurant);
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error adding restaurant:", error);
     res.status(400).json({ message: error.message });
   }
@@ -172,11 +171,11 @@ export const addRestaurant = async (req: Request, res: Response) => {
  *         description: Internal server error.
  */
 
-export const getAllRest = async (req: Request, res: Response) => {
+export const getAllRest = async (req, res) => {
   try {
     const rests = await Restaurant.find()
     res.status(200).json(rests)
-  } catch (error: any) {
+  } catch (error) {
     console.error("error getting restaurants", error)
     res.status(500).json({ message: "failed to fetch restaurants" })
   }
@@ -209,12 +208,12 @@ export const getAllRest = async (req: Request, res: Response) => {
  *         description: Internal server error.
  */
 
-export const getSpecificRest = async (req: Request, res: Response) => {
+export const getSpecificRest = async (req, res) => {
   const { id } = req.params
   try {
     const rest = await Restaurant.findById(id)
     res.status(200).json(rest)
-  } catch (error: any) {
+  } catch (error) {
     console.error("error getting restaurants", error)
     res.status(500).json({ message: "failed to fetch rest" })
   }
@@ -276,7 +275,7 @@ export const getSpecificRest = async (req: Request, res: Response) => {
  */
 
 
-export const addMenuItems = async (req: Request, res: Response) => {
+export const addMenuItems = async (req, res) => {
   try {
     const { id, dish } = req.body
     const rest = await Restaurant.findOne({ id })
@@ -289,7 +288,7 @@ export const addMenuItems = async (req: Request, res: Response) => {
     res.status(200).json({ message: "dish added successfully" })
 
   }
-  catch (error: any) {
+  catch (error) {
     console.log(error, "error")
     res.status(500).json({ message: "internal server error" })
   }

@@ -1,5 +1,5 @@
 import express from 'express';
-import { addFavRest, showFavRests, removeFavRest } from '../controllers/FavRestController';
+import { addFavRest, showFavRests, removeFavRest } from '../controllers/FavRestController.js';
 const router = express.Router()
 
 router.post("/add-favrest", addFavRest)

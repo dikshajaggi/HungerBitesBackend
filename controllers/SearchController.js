@@ -1,7 +1,6 @@
-import { Request, Response } from "express";
-import Restaurant from "../models/restaurant";
+import Restaurant from "../models/restaurant.js";
 
-export const searchRestAndDishes = async (req: Request, res: Response) => {
+export const searchRestAndDishes = async (req, res) => {
     try {
         const { name } = req.params;
 
@@ -21,7 +20,7 @@ export const searchRestAndDishes = async (req: Request, res: Response) => {
         const allRestaurants = await Restaurant.find({ 'menu.name': { $regex: regex } }).populate('menu');
 
         // Extract only the matching dishes
-        const matchingDishes:any = [];
+        const matchingDishes = [];
         allRestaurants.forEach(restaurant => {
             restaurant.menu.forEach(dish => {
                 if (dish.name && regex.test(dish.name)) {
@@ -35,7 +34,7 @@ export const searchRestAndDishes = async (req: Request, res: Response) => {
             restaurants: matchingRestaurants,
             dishes: matchingDishes
         });
-    } catch (error: any) {
+    } catch (error) {
         console.error('Error fetching restaurants and dishes:', error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }

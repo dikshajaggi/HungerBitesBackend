@@ -1,27 +1,26 @@
-import { Request, Response } from "express";
-import Category from "../models/category"
-import Restaurant from "../models/restaurant";
+import Category from "../models/category.js"
+import Restaurant from "../models/restaurant.js";
 
-export const addcategory = async (req: Request, res: Response) => {
+export const addcategory = async (req, res) => {
     try {
         const newRestaurant = new Category(req.body);
         await newRestaurant.save();
         res.status(201).json(newRestaurant);
-    } catch (error: any) {
+    } catch (error) {
         res.status(400).json({ message: error.message });
       }
 } 
 
-export const getAllCatgeories = async (req: Request, res: Response) => {
+export const getAllCatgeories = async (req, res) => {
     try {
         const category = await Category.find()
         res.status(200).json(category)
-    } catch (error: any) {
+    } catch (error) {
         res.status(500).json({message: error.message})
     }
 }
 
-export const fetchRestaurantsByCategory = async (req: Request, res: Response) => {
+export const fetchRestaurantsByCategory = async (req, res) => {
     try {
         const {id} = req.params
         console.log(id, "category nameee", req.params)

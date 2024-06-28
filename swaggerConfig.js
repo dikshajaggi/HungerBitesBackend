@@ -17,13 +17,13 @@ const swaggerDefinition = {
             description: 'Development server'
         }
     ],
-    apis: ['./routes/*.ts']
+    apis: ['./routes/*.js']
 };
 
 const options = {
     swaggerDefinition,
     // Paths to files containing OpenAPI definitions
-    apis: ['./routes/*.js', './routes/*.ts', './controllers/*.js', './controllers/*.ts']
+    apis: ['./routes/*.js', './controllers/*.js']
 };
 
 const swaggerSpec = swaggerJSDoc(options);

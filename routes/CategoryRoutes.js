@@ -1,5 +1,5 @@
 import express from "express"
-import { addcategory, fetchRestaurantsByCategory, getAllCatgeories } from "../controllers/CategoryController";
+import { addcategory, fetchRestaurantsByCategory, getAllCatgeories } from "../controllers/CategoryController.js";
 
 const router = express.Router();
 

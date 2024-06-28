@@ -1,5 +1,4 @@
-import { Request, Response } from "express"
-import Cart from "../models/cart"
+import Cart from "../models/cart.js"
 import { v4 as uuidv4 } from 'uuid';
 
 /**
@@ -62,7 +61,7 @@ import { v4 as uuidv4 } from 'uuid';
  *         description: Internal server error
  */
 
-export const addToCart = async (req: Request, res: Response) => {
+export const addToCart = async (req, res) => {
     try {
         const { user, menu, quantity } = req.body;
         let cart = await Cart.findOne({ user });
@@ -89,7 +88,7 @@ export const addToCart = async (req: Request, res: Response) => {
 };
 
 
-export const getAllCartItems = async (req: Request, res: Response) => {
+export const getAllCartItems = async (req, res) => {
     try {
         const user = req.params.id;
         const cart = await Cart.findOne({ user });
@@ -98,7 +97,7 @@ export const getAllCartItems = async (req: Request, res: Response) => {
         }
         res.status(200).json({ success: true, message: "Fetched all cart items successfully", items: cart });
 
-    } catch (error: any) {
+    } catch (error) {
         console.log(error, "error cart items")
         res.status(500).json({ success: false, message: "Internal server error" })
     }
@@ -141,7 +140,7 @@ export const getAllCartItems = async (req: Request, res: Response) => {
  *         description: Internal server error.
  */
 
-export const updateCartQty = async (req: Request, res: Response) => {
+export const updateCartQty = async (req, res) => {
     try {
         const { id, type } = req.body
         const userId = req.params.userId;
@@ -159,7 +158,7 @@ export const updateCartQty = async (req: Request, res: Response) => {
         }
         await cart.save()
         res.status(200).json({ success: true, items: cart, message: "Cart updated successfully" });
-    } catch (error: any) {
+    } catch (error) {
         console.log(error, "updatecartere")
         res.status(500).json({ success: false, message: "Internal server error" })
     }
@@ -188,7 +187,7 @@ export const updateCartQty = async (req: Request, res: Response) => {
  *         description: Internal server error.
  */
 
-export const deleteAllItems = async (req: Request, res: Response) => {
+export const deleteAllItems = async (req, res) => {
     try {
         const userId = req.params.userId;
         const cart = await Cart.findOne({ userId });
@@ -198,18 +197,19 @@ export const deleteAllItems = async (req: Request, res: Response) => {
         cart.items.splice(0, cart.items.length);
         await cart.save()
         res.status(200).json({ success: true, message: "All cart items removed successfully" })
-    } catch (error: any) {
+    } catch (error) {
         res.status(500).json({ success: false, message: "Internal server error" })
     }
 }
 
-export const deleteSpecificItem = async (req: Request, res: Response) => {
+export const deleteSpecificItem = async (req, res) => {
     try {
         const {userId, dishId} = req.params;
         const cart = await Cart.findOne({ user: userId });
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Cart not found' });
         }
+        console.log(cart, "cartdata", dishId, cart.items[0].menu)
         const itemIndex = cart.items.findIndex(item => item.menu.id === dishId)
         if (itemIndex === -1) {
             return res.status(404).json({ success: false, message: 'Item not found in cart' });
@@ -217,7 +217,7 @@ export const deleteSpecificItem = async (req: Request, res: Response) => {
         cart.items.splice(itemIndex, 1)
         await cart.save()
         res.status(200).json({ success: true, message: "item removed successfully" })
-    } catch (error: any) {
+    } catch (error) {
         res.status(500).json({ success: false, message: "Internal server error" })
     }
 }
