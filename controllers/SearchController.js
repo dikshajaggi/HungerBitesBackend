@@ -1,5 +1,79 @@
 import Restaurant from "../models/restaurant.js";
 
+/**
+ * @swagger
+ * /api/search/{name}:
+ *   get:
+ *     summary: Search restaurants and dishes by name
+ *     tags: 
+ *       - Search
+ *     parameters:
+ *       - in: path
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The search term for restaurants and dishes
+ *         example: "Pizza"
+ *     responses:
+ *       200:
+ *         description: Fetched matching restaurants and dishes successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 restaurants:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                         example: "60c72b2f5f1b2c001c8e4c8e"
+ *                       name:
+ *                         type: string
+ *                         example: "Restaurant A"
+ *                       menu:
+ *                         type: array
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             id:
+ *                               type: string
+ *                               example: "60c72b2f5f1b2c001c8e4c8c"
+ *                             name:
+ *                               type: string
+ *                               example: "Pizza"
+ *                             description:
+ *                               type: string
+ *                               example: "Delicious pizza with cheese and toppings"
+ *                             price:
+ *                               type: number
+ *                               example: 10.99
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
+
+/**
+ * Search restaurants and dishes by name.
+ * 
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ */
+
 export const searchRestAndDishes = async (req, res) => {
     try {
         const { name } = req.params;

@@ -7,8 +7,8 @@ const swaggerDefinition = {
         version: '1.0.0',
         description: 'Documentation for the APIs in Hunger Bites',
         contact: {
-            name: 'Diksha Jaggi',
-            email: 'diksha2000may@gmail.com'
+            name: 'Shubham Sharma',
+            email: 'sharma.shubham2124@gmail.com'
         }
     },
     servers: [
