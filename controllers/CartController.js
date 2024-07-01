@@ -88,6 +88,91 @@ export const addToCart = async (req, res) => {
 };
 
 
+/**
+ * @swagger
+ * /api/get-cart-items/{id}:
+ *   get:
+ *     summary: Get all items in the cart for a user
+ *     tags: 
+ *       - Cart
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user ID
+ *         example: "60c72b2f5f1b2c001c8e4c8b"
+ *     responses:
+ *       200:
+ *         description: Fetched all cart items successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Fetched all cart items successfully"
+ *                 items:
+ *                   type: object
+ *                   description: The cart items
+ *                   properties:
+ *                     user:
+ *                       type: string
+ *                       description: The user ID
+ *                     items:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           menu:
+ *                             type: object
+ *                             properties:
+ *                               id:
+ *                                 type: string
+ *                                 description: The ID of the menu item
+ *                               name:
+ *                                 type: string
+ *                                 description: The name of the menu item
+ *                               description:
+ *                                 type: string
+ *                                 description: The description of the menu item
+ *                               price:
+ *                                 type: number
+ *                                 description: The price of the menu item
+ *                               category:
+ *                                 type: string
+ *                                 description: The category of the menu item
+ *                               imageId:
+ *                                 type: string
+ *                                 description: The ID of the image associated with the menu item
+ *                               inStock:
+ *                                 type: number
+ *                                 description: The quantity of the menu item in stock
+ *                           quantity:
+ *                             type: number
+ *                             description: The quantity of the item in the cart
+ *                           id:
+ *                             type: string
+ *                             description: The ID of the cart item
+ *       404:
+ *         description: Cart not found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * Get all items in the cart for a user.
+ * 
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ */
+
 export const getAllCartItems = async (req, res) => {
     try {
         const user = req.params.id;
@@ -202,9 +287,59 @@ export const deleteAllItems = async (req, res) => {
     }
 }
 
+/**
+ * @swagger
+ * /api/delete-specific/{userId}/{dishId}:
+ *   delete:
+ *     summary: Delete a specific item from the cart
+ *     tags: 
+ *       - Cart
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user ID
+ *         example: "60c72b2f5f1b2c001c8e4c8b"
+ *       - in: path
+ *         name: dishId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the menu item to delete
+ *         example: "60c72b2f5f1b2c001c8e4c8c"
+ *     responses:
+ *       200:
+ *         description: Item removed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "item removed successfully"
+ *       404:
+ *         description: Cart or item not found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * Delete a specific item from the cart.
+ * 
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ */
+
 export const deleteSpecificItem = async (req, res) => {
     try {
-        const {userId, dishId} = req.params;
+        const { userId, dishId } = req.params;
         const cart = await Cart.findOne({ user: userId });
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Cart not found' });

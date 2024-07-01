@@ -5,6 +5,6 @@ const router = express.Router()
 
 router.post('/place-order', createOrder)
 router.get('/all-orders/:id', getAllOrders)
-router.get('/order/:id', getSpecificOrder)
+router.get('/order', getSpecificOrder)
 
 export default router
