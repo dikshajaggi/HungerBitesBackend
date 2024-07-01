@@ -13,7 +13,7 @@ const swaggerDefinition = {
     },
     servers: [
         {
-            url: 'http://localhost:7000',
+            url: 'https://hungerbitesbackend.onrender.com',
             description: 'Development server'
         }
     ],
